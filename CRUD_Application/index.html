@@ -3,29 +3,92 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Simple CRUD System</title>
+    <title>Inventory Management - GreenLeaf Grocers</title>
+    <style>
+        /* General Body Styling */
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f7f7f7;
+            margin: 0;
+            padding: 20px;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        /* Header Styling */
+        h1 {
+            text-align: center;
+            color: #2c3e50;
+            margin-bottom: 30px;
+            font-size: 2.5rem;
+        }
+
+        /* Navigation Bar Styling */
+        .nav-links {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+        .nav-links a {
+            padding: 12px 24px;
+            background-color: #3498db;
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            font-size: 16px;
+            text-align: center;
+            transition: background-color 0.3s ease;
+            width: 150px;
+        }
+        .nav-links a:hover {
+            background-color: #2980b9;
+        }
+
+        /* Footer Styling */
+        footer {
+            text-align: center;
+            margin-top: 50px;
+            font-size: 14px;
+            color: #7f8c8d;
+        }
+
+        footer a {
+            color: #3498db;
+            text-decoration: none;
+        }
+
+        footer a:hover {
+            text-decoration: underline;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .nav-links {
+                flex-direction: column;
+                gap: 15px;
+            }
+            h1 {
+                font-size: 2rem;
+            }
+        }
+    </style>
 </head>
 <body>
-    <h1>Entity CRUD Operations</h1>
 
-    <!-- Create Entity Form -->
-    <form id="create-form">
-        <input type="text" id="entity-name" placeholder="Enter Entity Name" required>
-        <button type="submit">Create Entity</button>
-    </form>
+    <h1>GreenLeaf Grocers - Dashboard</h1>
 
-    <!-- Entity List -->
-    <h2>Entities:</h2>
-    <ul id="entity-list"></ul>
+    <!-- Navigation Links -->
+    <div class="nav-links">
+        <a href="add-product.html">Add Product</a>
+        <a href="product-list.html">View Product List</a>
+    </div>
 
-    <!-- Edit Entity Form (hidden initially) -->
-    <h2>Edit Entity</h2>
-    <form id="edit-form" style="display:none;">
-        <input type="text" id="edit-entity-name" placeholder="Edit Entity Name" required>
-        <button type="submit">Save Changes</button>
-        <button type="button" id="cancel-edit">Cancel</button>
-    </form>
+    <!-- Footer with Additional Information -->
+    <footer>
+        <p>&copy; 2024 GreenLeaf Grocers. All Rights Reserved.</p>
+        <p>Visit our <a href="about-us.html">About Us</a> page to learn more.</p>
+    </footer>
 
-    <script src="js/app.js"></script>
 </body>
 </html>
