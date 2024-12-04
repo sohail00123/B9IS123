@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Product</title>
+</head>
+<body>
+    <h1>Edit Product</h1>
+    <form id="edit-form">
+        <label for="edit-product-name">Name:</label>
+        <input type="text" id="edit-product-name" required><br><br>
+
+        <label for="edit-product-price">Price:</label>
+        <input type="number" id="edit-product-price" step="0.01" required><br><br>
+
+        <label for="edit-product-quantity">Quantity:</label>
+        <input type="number" id="edit-product-quantity" required><br><br>
+
+        <button type="submit">Update Product</button>
+    </form>
+
+    <button onclick="window.location.href='product-list.html'">Back to Product List</button>
+
+    <script src="app.js"></script>
+    <script>
+        let editProductId;
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const urlParams = new URLSearchParams(window.location.search);
+            editProductId = urlParams.get('id'); // Get the product ID from the URL
+
+            if (editProductId) {
+                fetch(`/api/products/${editProductId}`)
+                    .then(response => response.json())
+                    .then(product => {
+                        document.getElementById('edit-product-name').value = product.name;
+                        document.getElementById('edit-product-price').value = product.price;
+                        document.getElementById('edit-product-quantity').value = product.quantity;
+                    });
+            }
+
+            const editForm = document.getElementById('edit-form');
+            editForm.addEventListener('submit', (event) => {
+                event.preventDefault();
+
+                const updatedProduct = {
+                    name: document.getElementById('edit-product-name').value,
+                    price: parseFloat(document.getElementById('edit-product-price').value),
+                    quantity: parseInt(document.getElementById('edit-product-quantity').value),
+                };
+
+                fetch(`/api/products/${editProductId}`, {
+                    method: 'PUT',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(updatedProduct),
+                })
+                .then(response => response.json())
+                .then(() => {
+                    alert('Product updated!');
+                    window.location.href = 'product-list.html';
+                })
+                .catch(error => console.error('Error updating product:', error));
+            });
+        });
+    </script>
+</body>
+</html>

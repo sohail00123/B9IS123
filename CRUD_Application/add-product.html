@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Product - GreenLeaf Grocers</title>
+</head>
+<body>
+    <h1>Add New Product</h1>
+    
+    <form id="create-form">
+        <input type="text" id="product-name" placeholder="Enter Product Name" required>
+        <input type="number" id="product-price" placeholder="Enter Product Price" required>
+        <input type="number" id="product-quantity" placeholder="Enter Product Quantity" required>
+        <button type="submit">Add Product</button>
+    </form>
+    
+    <a href="index.html">Back to Dashboard</a>
+
+    <script src="app.js"></script>
+    <script>
+        const createForm = document.getElementById('create-form');
+        createForm.addEventListener('submit', (event) => {
+            event.preventDefault();
+
+            const newProduct = {
+                name: document.getElementById('product-name').value,
+                price: parseFloat(document.getElementById('product-price').value),
+                quantity: parseInt(document.getElementById('product-quantity').value),
+            };
+
+            fetch('/api/products', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(newProduct),
+            })
+            .then(response => response.json())
+            .then(() => {
+                alert('Product added!');
+                window.location.href = 'product-list.html';
+            })
+            .catch(error => console.error('Error adding product:', error));
+        });
+    </script>
+</body>
+</html>
